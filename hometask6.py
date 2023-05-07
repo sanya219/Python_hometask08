@@ -1,4 +1,5 @@
 import random
+from math import gcd
 
 # Задача 1. Дано натуральное число N. Найдите значение выражения: N + NN + NNN
 # N может быть любой длины.
@@ -17,7 +18,6 @@ Task1()
 # совпадающая с введённым числом.
 # [0, 5, 6, 2, 7, 7, 8, 1, 1, 9] - 277 -> да
 # [4, 4, 3, 6, 7, 0, 8, 5, 1, 2] - 812 -> нет
-
 def Task2():
     print("\nЗадача 2:")
     numbers = [random.randint(1, 9) for _ in range(15)]
@@ -28,6 +28,26 @@ def Task2():
         print("Последовательность существует.")
     else:
         print("Последовательность не существует.")
-            
-
 Task2()
+
+# Задача 3. Найдите все простые несократимые дроби, лежащие между 0 и 1, знаменатель которых не превышает 11.
+def Task3():
+    print("\nЗадача 3:")
+    max_denominator = 11
+    fractions = simple_fractions(max_denominator)
+    print("Несократимые дроби между 0 и 1 с знаменателем не больше", max_denominator)
+    for fraction in fractions:
+        print(f"{fraction[0]}/{fraction[1]}")
+
+def is_coprime(a, b):
+    return gcd(a, b) == 1
+
+def simple_fractions(max_denominator):
+    fractions = []
+    for denominator in range(1, max_denominator + 1):
+        for numerator in range(1, denominator):
+            if is_coprime(numerator, denominator):
+                fractions.append((numerator, denominator))
+    return fractions
+
+Task3()
